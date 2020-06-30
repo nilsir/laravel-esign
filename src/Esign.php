@@ -30,6 +30,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @property \Nilsir\LaravelEsign\Account\Account   $account
  * @property \Nilsir\LaravelEsign\File\File         $file
  * @property \Nilsir\LaravelEsign\SignFlow\SignFlow $signflow
+ * @property \Nilsir\LaravelEsign\Template\Template $template
  */
 class Esign extends Container
 {
@@ -37,6 +38,7 @@ class Esign extends Container
         Foundation\ServiceProviders\AccountProvider::class,
         Foundation\ServiceProviders\FileProvider::class,
         Foundation\ServiceProviders\SignFlowProvider::class,
+        Foundation\ServiceProviders\TemplateProvider::class,
     ];
 
     public function __construct(array $config = [])
