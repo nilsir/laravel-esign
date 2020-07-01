@@ -19,7 +19,7 @@ class TemplateProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         $pimple['template'] = function ($pimple) {
-            return new Template\Template($pimple['template']);
+            return new Template\Template($pimple['access_token']);
         };
     }
 }
