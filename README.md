@@ -27,7 +27,7 @@ $mobile = 'your_mobile'; // 手机号, 签署流程开始时对应的签署人�
 $email = 'your_email'; // 邮箱地址, 签署流程开始时对应的签署人会收到邮件通知
 
 // 个人账户创建, 有唯一标志, 需要记录返回的 accountId
-$accountInfo = $eSign->account->createPersonAccount($thirdPartyUserId, $name, $idType, $idNumber, $mobile, $email);
+$accountInfo = $eSign->account->createPersonalAccount($thirdPartyUserId, $name, $idType, $idNumber, $mobile, $email);
 $accountId = $accountInfo['accountId'];
 
 // 测试合同模板ID

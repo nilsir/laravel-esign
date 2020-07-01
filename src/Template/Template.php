@@ -118,7 +118,7 @@ class Template extends AbstractAPI
      *
      * @throws HttpException
      */
-    public function getPersonalTemplates($accountId, $offset = 0, $size = 10)
+    public function queryPersonalTemplates($accountId, $offset = 0, $size = 10)
     {
         $url = sprintf('/v1/accounts/%s/seals', $accountId);
         $params = [
@@ -140,7 +140,7 @@ class Template extends AbstractAPI
      *
      * @throws HttpException
      */
-    public function getOfficialTemplates($orgId, $offset = 0, $size = 10)
+    public function queryOfficialTemplates($orgId, $offset = 0, $size = 10)
     {
         $url = sprintf('/v1/organizations/%s/seals', $orgId);
         $params = [
@@ -161,7 +161,7 @@ class Template extends AbstractAPI
      *
      * @throws HttpException
      */
-    public function deletePersonalTemplates($accountId, $sealId)
+    public function deletePersonalTemplate($accountId, $sealId)
     {
         $url = sprintf('/v1/accounts/%s/seals/%s', $accountId, $sealId);
         $params = [];
@@ -179,7 +179,7 @@ class Template extends AbstractAPI
      *
      * @throws HttpException
      */
-    public function deleteOfficialTemplates($orgId, $sealId)
+    public function deleteOfficialTemplate($orgId, $sealId)
     {
         $url = sprintf('/v1/organizations/%s/seals/%s', $orgId, $sealId);
         $params = [];
