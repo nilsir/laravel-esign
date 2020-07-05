@@ -21,11 +21,34 @@ class SignFlow extends AbstractAPI
     const NOTICE_TYPE_NULL = '';
 
     /**
+     * 一步发起签署.
+     *
+     * @param array $docs        附件信息
+     * @param array $flowInfo    抄送人人列表
+     * @param array $signers     待签文档信息
+     * @param array $attachments 流程基本信息
+     * @param array $copiers     签署方信息
+     *
+     * @return Collection|null
+     *
+     * @throws HttpException
+     */
+    public function createFlowOneStep($docs, $flowInfo, $signers, $attachments = [], $copiers = [])
+    {
+        $url = '/api/v2/signflows/createFlowOneStep';
+        $params = compact('docs', 'flowInfo', 'signers');
+        $attachments and $params['attachments'] = $attachments;
+        $copiers and $params['copiers'] = $copiers;
+
+        return $this->parseJSON('json', [$url, $params]);
+    }
+
+    /**
      * 签署流程创建.
      *
-     * @param $businessScene
-     * @param $noticeDeveloperUrl
-     * @param $autoArchive
+     * @param string $businessScene      文件主题
+     * @param string $noticeDeveloperUrl 回调通知地址
+     * @param bool   $autoArchive        是否自动归档
      *
      * @return Collection|null
      *
@@ -48,11 +71,11 @@ class SignFlow extends AbstractAPI
     /**
      * 流程文档添加.
      *
-     * @param $flowId
-     * @param $fileId
-     * @param int  $encryption
-     * @param null $fileName
-     * @param null $filePassword
+     * @param string $flowId       流程id
+     * @param string $fileId       文档id
+     * @param int    $encryption   是否加密
+     * @param null   $fileName     文件名称
+     * @param null   $filePassword 文档密码
      *
      * @return Collection|null
      *
@@ -73,14 +96,14 @@ class SignFlow extends AbstractAPI
     /**
      * 添加平台自动盖章签署区.
      *
-     * @param $flowId
-     * @param $fileId
-     * @param $sealId
-     * @param $posPage
-     * @param $posX
-     * @param $posY
-     * @param $signDateBeanType
-     * @param $signDateBean
+     * @param string $flowId           流程id
+     * @param string $fileId           文件file id
+     * @param string $sealId           印章id
+     * @param string $posPage          页码信息
+     * @param float  $posX             x坐标
+     * @param float  $posY             y坐标
+     * @param int    $signDateBeanType 是否需要添加签署日期
+     * @param array  $signDateBean     签章日期信息
      *
      * @return Collection|null
      *
@@ -113,14 +136,14 @@ class SignFlow extends AbstractAPI
     /**
      * 添加手动盖章签署区.
      *
-     * @param $flowId
-     * @param $fileId
-     * @param $signerAccountId
-     * @param $posPage
-     * @param $posX
-     * @param $posY
-     * @param $signDateBeanType
-     * @param $signDateBean
+     * @param string $flowId           流程id
+     * @param string $fileId           文件file id
+     * @param string $signerAccountId  签署操作人个人账号标识
+     * @param string $posPage          页码信息
+     * @param float  $posX             x坐标
+     * @param float  $posY             y坐标
+     * @param int    $signDateBeanType 是否需要添加签署日期
+     * @param array  $signDateBean     签章日期信息
      *
      * @return Collection|null
      *
@@ -151,9 +174,9 @@ class SignFlow extends AbstractAPI
     }
 
     /**
-     * 流程开始.
+     * 签署流程开启.
      *
-     * @param $flowId
+     * @param string $flowId 流程id
      *
      * @return Collection|null
      *
@@ -169,11 +192,11 @@ class SignFlow extends AbstractAPI
     /**
      * 获取签署地址
      *
-     * @param $flowId
-     * @param $accountId
-     * @param null $orgId
-     * @param int  $urlType
-     * @param null $appScheme
+     * @param string $flowId    流程id
+     * @param string $accountId 签署人账号id
+     * @param null   $orgId     指定机构id
+     * @param int    $urlType   链接类型: 0-签署链接;1-预览链接;默认0
+     * @param null   $appScheme app内对接必传
      *
      * @return Collection|null
      *
