@@ -166,7 +166,7 @@ class File extends AbstractAPI
      *
      * @throws HttpException
      */
-    public function download($templateId)
+    public function downloadDocTemplate($templateId)
     {
         $url = sprintf('/v1/docTemplates/%s', $templateId);
 
@@ -184,13 +184,49 @@ class File extends AbstractAPI
      *
      * @throws HttpException
      */
-    public function createByTemplateId($templateId, $name, $simpleFormFields)
+    public function createByTemplate($templateId, $name, $simpleFormFields)
     {
         $url = '/v1/files/createByTemplate';
         $params = [
             'name' => $name,
             'templateId' => $templateId,
             'simpleFormFields' => $simpleFormFields,
+        ];
+
+        return $this->parseJSON('json', [$url, $params]);
+    }
+
+    /**
+     * @param string $fileId 文件id
+     *
+     * @return Collection|null
+     *
+     * @throws HttpException
+     */
+    public function downloadFile($fileId)
+    {
+        $url = sprintf('/v1/files/%s', $fileId);
+
+        return $this->parseJSON('get', [$url]);
+    }
+
+    /**
+     * @param array       $files        文件信息
+     * @param string|null $notifyUrl    水印图片全部添加完成回调地址
+     * @param string|null $thirdOrderNo 三方流水号（唯一），有回调必填
+     *
+     * @return Collection|null
+     *
+     * @throws HttpException
+     */
+    public function batchAddWatermark($files, $notifyUrl = null, $thirdOrderNo = null)
+    {
+        $url = '/v1/files/batchAddWatermark';
+
+        $params = [
+            'files' => $files,
+            'notifyUrl' => $notifyUrl,
+            'thirdOrderNo' => $thirdOrderNo,
         ];
 
         return $this->parseJSON('json', [$url, $params]);
