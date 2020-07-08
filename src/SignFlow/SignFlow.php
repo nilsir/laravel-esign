@@ -214,4 +214,36 @@ class SignFlow extends AbstractAPI
 
         return $this->parseJSON('get', [$url, $params]);
     }
+
+    /**
+     * 签署流程归档.
+     *
+     * @param string $flowId 流程id
+     *
+     * @return Collection|null
+     *
+     * @throws HttpException
+     */
+    public function archiveSign($flowId)
+    {
+        $url = sprintf('/v1/signflows/%s/archive', $flowId);
+
+        return $this->parseJSON('put', [$url]);
+    }
+
+    /**
+     * 流程文档下载.
+     *
+     * @param string $flowId 流程id
+     *
+     * @return Collection|null
+     *
+     * @throws HttpException
+     */
+    public function downloadDocument($flowId)
+    {
+        $url = sprintf('/v1/signflows/%s/documents', $flowId);
+
+        return $this->parseJSON('get', [$url]);
+    }
 }
