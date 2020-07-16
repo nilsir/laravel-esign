@@ -1,6 +1,6 @@
 <h1 align="center"> laravel-esign </h1>
 
-<p align="center"> .</p>
+<p align="center"> E签宝-悟空API V2, 支持 laravel </p>
 
 
 ## Installing
