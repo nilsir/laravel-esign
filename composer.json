@@ -1,6 +1,6 @@
 {
     "name": "nilsir\/laravel-esign",
-    "description": "esign for laravel",
+    "description": "E签宝-悟空API V2, 支持 laravel",
     "license": "MIT",
     "authors": [
         {
